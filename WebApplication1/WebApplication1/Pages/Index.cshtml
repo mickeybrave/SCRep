@@ -1,0 +1,79 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">All Memebers</h1>
+   
+    <form asp-page="./Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Search by policy number:
+                <input type="text" name="searchPolicyNumber" value="@Model.SearchPolicyNumber" data-val-required="The UserName field is required." />
+                <span asp-validation-for="@Model.SearchPolicyNumber" class="error"></span>
+                Search by member card number
+                <input type="text" name="searchMemberCardNumber" value="@Model.SearchMemberCardNumber" />
+                <input type="submit" value="Search" class="btn btn-primary" /> |
+                <a asp-page="./Index">Back to all members</a>
+            </p>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customers[0].Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customers[0].FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customers[0].LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customers[0].DataOfBirth)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customers[0].PolicyNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customers[0].MemberCardNumber)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Customers)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PolicyNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberCardNumber)
+                </td>
+
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
